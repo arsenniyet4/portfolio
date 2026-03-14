@@ -5,46 +5,11 @@
    ============================================================ */
 const PROJECTS = [
   {
-    id: 1,
-    name: 'E-Commerce Platform',
-    description:
-      'A full-stack online shopping platform featuring product listings, a shopping cart, user authentication, and Stripe payment integration.',
-    tags: ['Node.js', 'React', 'MongoDB', 'Stripe'],
-  },
-  {
-    id: 2,
-    name: 'Real-Time Chat App',
-    description:
-      'A WebSocket-powered messaging application supporting private rooms, file sharing, and live typing indicators.',
-    tags: ['Socket.io', 'Express', 'Vue.js', 'Redis'],
-  },
-  {
-    id: 3,
-    name: 'AI Task Manager',
-    description:
-      'A productivity app that uses OpenAI to auto-prioritize and categorize tasks, with calendar sync and smart reminders.',
-    tags: ['Python', 'FastAPI', 'OpenAI', 'PostgreSQL'],
-  },
-  {
-    id: 4,
-    name: 'Weather Dashboard',
-    description:
-      'An interactive weather visualization dashboard with historical trend charts, location search, and severe weather alerts.',
-    tags: ['React', 'D3.js', 'REST API', 'Tailwind'],
-  },
-  {
-    id: 5,
-    name: 'DevOps Pipeline Tool',
-    description:
-      'A CI/CD automation tool that orchestrates build, test, and deployment workflows across multi-cloud environments.',
-    tags: ['Go', 'Docker', 'Kubernetes', 'AWS'],
-  },
-  {
     id: 6,
-    name: 'Fitness Tracker',
-    description:
-      'A cross-platform mobile app for logging workouts, tracking personal records, and visualizing progress over time.',
-    tags: ['React Native', 'GraphQL', 'Firebase', 'TypeScript'],
+    name: 'Stock Alert System',
+    bgImage: 'images/stock-alert-system-tile-bg.png',
+    paddedBg: true,
+    hideOverlay: true,
   },
 ];
 
@@ -76,12 +41,31 @@ function buildTagsHTML(tags) {
  * @returns {string} HTML string for the project item
  */
 function buildProjectItemHTML(project) {
+  let bgStyle = '';
+  if (project.bgImage) {
+    const size = project.paddedBg
+      ? 'calc(100% - 14px) calc(100% - 14px)'
+      : 'cover';
+    const color = project.paddedBg ? '#323232' : 'transparent';
+    bgStyle = ` style="background-image: url('${project.bgImage}'); background-size: ${size}; background-position: center; background-repeat: no-repeat; background-color: ${color};"`;
+  }
+  let extraClass = project.bgImage ? ' project-tile--has-bg' : '';
+  if (project.darkerBg) extraClass += ' project-tile--darker-bg';
+  if (!project.description) extraClass += ' project-tile--no-desc';
+  if (project.noOverlay) extraClass += ' project-tile--no-overlay';
+  if (project.hideOverlay) extraClass += ' project-tile--hide-overlay';
+  const descHTML = project.description
+    ? `<p class="project-tile__description">${project.description}</p>`
+    : '';
+  const tagsHTML = project.tags
+    ? `<div class="project-tile__tags">${buildTagsHTML(project.tags)}</div>`
+    : '';
   return `
     <article class="project-item" data-project-id="${project.id}">
       <h2 class="project-item__name">${project.name}</h2>
-      <div class="project-tile">
-        <p class="project-tile__description">${project.description}</p>
-        <div class="project-tile__tags">${buildTagsHTML(project.tags)}</div>
+      <div class="project-tile${extraClass}"${bgStyle}>
+        ${descHTML}
+        ${tagsHTML}
       </div>
     </article>
   `;
