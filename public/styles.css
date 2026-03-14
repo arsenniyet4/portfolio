@@ -1,0 +1,173 @@
+/* ============================================================
+   Base & Reset
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #f0f2f8;
+  --color-surface: #ffffff;
+  --color-surface-hover: #eef0fb;
+  --color-border: #c8cde8;
+  --color-accent: #5348e8;
+  --color-accent-light: #5348e8;
+  --color-text-primary: #1a1d35;
+  --color-text-secondary: #555880;
+
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --top-panel-height: 64px;
+  --tile-aspect-ratio: 16 / 7;
+  --grid-gap: 28px;
+  --grid-columns: 3;
+  --content-padding: 48px;
+  --border-radius-tile: 12px;
+  --border-radius-tag: 20px;
+
+  --transition-speed: 0.25s;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   Top Panel
+   ============================================================ */
+.top-panel {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--top-panel-height);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--content-padding);
+  box-shadow: 0 2px 16px rgba(80, 90, 160, 0.12);
+}
+
+.top-panel__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-text-primary);
+}
+
+.top-panel__title span {
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   Main Content
+   ============================================================ */
+.main-content {
+  padding: var(--content-padding);
+}
+
+/* ============================================================
+   Projects Grid
+   ============================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+}
+
+/* ============================================================
+   Project Item (name label + tile)
+   ============================================================ */
+.project-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-item__name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* ============================================================
+   Tile
+   ============================================================ */
+.project-tile {
+  width: 100%;
+  aspect-ratio: var(--tile-aspect-ratio);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-tile);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease,
+              border-color var(--transition-speed) ease,
+              background-color var(--transition-speed) ease;
+}
+
+.project-tile:hover {
+  transform: translateY(-4px);
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 32px rgba(83, 72, 232, 0.18);
+}
+
+.project-tile__description {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.project-tile__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.project-tile__tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-light);
+  background-color: rgba(83, 72, 232, 0.08);
+  border: 1px solid rgba(83, 72, 232, 0.25);
+  border-radius: var(--border-radius-tag);
+  padding: 3px 10px;
+}
+
+/* ============================================================
+   Responsive — 2 columns on medium, 1 on small
+   ============================================================ */
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content {
+    padding: 24px 16px;
+  }
+}
