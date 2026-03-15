@@ -1,0 +1,206 @@
+/* ============================================================
+   Base & Reset
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #f0f2f8;
+  --color-surface: #ffffff;
+  --color-border: #c8cde8;
+  --color-accent: #5348e8;
+  --color-text-primary: #1a1d35;
+  --color-text-secondary: #555880;
+  --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --content-max-width: 860px;
+  --content-padding: 48px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   Top Bar
+   ============================================================ */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--content-padding);
+  gap: 24px;
+  box-shadow: 0 2px 16px rgba(80, 90, 160, 0.12);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.back-btn:hover {
+  opacity: 0.75;
+}
+
+.top-bar__center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.top-bar__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 4px 14px 4px 10px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.github-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.github-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Page Content
+   ============================================================ */
+.page-content {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 48px var(--content-padding) 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(80, 90, 160, 0.15);
+}
+
+.hero__image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.section__text {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   Example Images
+   ============================================================ */
+.example-image-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(80, 90, 160, 0.08);
+}
+
+.example-image {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  object-fit: contain;
+}
+
+.example-image--small {
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.example-image--medium {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.example-image__caption {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 640px) {
+  :root {
+    --content-padding: 20px;
+  }
+
+  .top-bar__title {
+    font-size: 1rem;
+  }
+
+  .github-link {
+    display: none;
+  }
+}

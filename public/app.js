@@ -7,9 +7,10 @@ const PROJECTS = [
   {
     id: 6,
     name: 'Stock Alert System',
-    bgImage: 'images/stock-alert-system-tile-bg.png',
+    bgImage: 'proj-stock-alert-system/images/stock-alert-system-tile-bg.png',
     paddedBg: true,
     hideOverlay: true,
+    link: 'proj-stock-alert-system/index.html',
   },
 ];
 
@@ -60,13 +61,18 @@ function buildProjectItemHTML(project) {
   const tagsHTML = project.tags
     ? `<div class="project-tile__tags">${buildTagsHTML(project.tags)}</div>`
     : '';
+  const tileInner = `
+    <div class="project-tile${extraClass}"${bgStyle}>
+      ${descHTML}
+      ${tagsHTML}
+    </div>`;
+  const tileWrapped = project.link
+    ? `<a href="${project.link}" class="project-tile__link">${tileInner}</a>`
+    : tileInner;
   return `
     <article class="project-item" data-project-id="${project.id}">
       <h2 class="project-item__name">${project.name}</h2>
-      <div class="project-tile${extraClass}"${bgStyle}>
-        ${descHTML}
-        ${tagsHTML}
-      </div>
+      ${tileWrapped}
     </article>
   `;
 }
